@@ -34,64 +34,84 @@
 
 
 import 'package:flutter/material.dart';
-
-void main() {
+void main()
+{
   runApp(MyApp());
 }
-
-//1st MyApp class - hub class
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeScreen(),
-    );
-  }
+class MyApp extends StatelessWidget
+{
+   const MyApp({super.key});
+   @override
+   Widget build(BuildContext context)
+   {
+      return MaterialApp(
+        home:HomeScreen(),
+      );
+   }
 }
-
-//Class HomeScreen- first page in app
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget
+{
   const HomeScreen({super.key});
-
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home screen'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondScreen()),
-            );
-          },
-          child: Text('Go to Second Screen'),
-        ),
-      ),
+  Widget build(BuildContext context)
+  {
+    var mq= MediaQuery.of(context);
+    var screenwidth=mq.size.width;
+    if(screenwidth<600)
+    {
+        return Scaffold(
+        appBar: AppBar(title: Text('mobile layout')),
+        body: bnc(),
+      );
+    }
+    else if(screenwidth<1200)
+    {
+      return Scaffold(
+        appBar: AppBar(title: Text('tablet layout')),
+        body: bmc(),
+      );
+    }
+    else
+    {
+      return Scaffold(
+        appBar: AppBar(title: Text('desktop layout')),
+        body:bwc(),
+      );
+    }
+  }
+  Widget bnc()
+  {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Container(color:Colors.blue,width:100,height:100),
+        Container(color:Colors.green,width:100,height:100),
+        Container(color:Colors.red,width:100,height:100),
+      ],
     );
   }
-}
-
-//3rd claas SecondScreen- second page
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Second screen'),
-      ),
-      body: ElevatedButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: Text('Go back to Home screen'),
-      ),
+  Widget bmc()
+  {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Container(color:Colors.blue,width:100,height:100),
+        Container(color:Colors.red,width:100,height:100),
+        Container(color:Colors.green,width:100,height:100),
+      ],
+    );
+  }
+  Widget bwc()
+  {
+    return GridView.count(
+      crossAxisCount:3,
+      mainAxisSpacing:10,
+      crossAxisSpacing:10,
+      children: <Widget>[
+        Container(color:Colors.blue,width:100,height:100),
+        Container(color:Colors.red,width:100,height:100),
+        Container(color:Colors.green,width:100,height:100),
+      ],
     );
   }
 }
