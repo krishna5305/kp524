@@ -28,3 +28,276 @@
   </form>
 </body>
 </html>
+
+
+// media queries and breakpoints ------------------------------------------------------------------------------------
+
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+//1st MyApp class - hub class
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeScreen(),
+    );
+  }
+}
+
+//Class HomeScreen- first page in app
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home screen'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondScreen()),
+            );
+          },
+          child: Text('Go to Second Screen'),
+        ),
+      ),
+    );
+  }
+}
+
+//3rd claas SecondScreen- second page
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second screen'),
+      ),
+      body: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Go back to Home screen'),
+      ),
+    );
+  }
+}
+
+
+// navigation between different screens------------------------------------------------------------------------------------
+
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+//1st MyApp class - hub class
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/second': (context) => SecondScreen(),
+      },
+    );
+  }
+}
+
+//Class HomeScreen- first page in app
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home screen'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/second');
+          },
+          child: Text('Go to Second Screen'),
+        ),
+      ),
+    );
+  }
+}
+
+//3rd claas SecondScreen- second page
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second screen'),
+      ),
+      body: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Go back to Home screen'),
+      ),
+    );
+  }
+}
+
+// styling using themes ------------------------------------------------------------------------------------
+
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeScreen(),
+    );
+  }
+}
+
+//Home screen - class
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Custom Widget Example"),
+      ),
+      body: Center(
+        child: IconTextButton(
+            icon: Icons.thumb_up, //variable 1
+            text: 'Like', //variable 2
+            onPressed: () {
+              //variable 3
+              print('Button Pressed!');
+            }),
+      ),
+    );
+  }
+}
+
+//IconTextButton- class
+class IconTextButton extends StatelessWidget {
+  //variable declarations
+  final IconData icon; //var-1 declaration
+  final String text; //var-2 declration
+  final VoidCallback onPressed; //var-3 declaration
+  //constructor
+  IconTextButton({
+    required this.icon,
+    required this.text,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(text),
+    );
+  }
+}
+
+
+// simple form using flutter  ------------------------------------------------------------------------------------
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeScreen(),
+    );
+  }
+}
+
+//Home screen - class
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Custom Widget Example"),
+      ),
+      body: Center(
+        child: IconTextButton(
+            icon: Icons.thumb_up, //variable 1
+            text: 'Like', //variable 2
+            onPressed: () {
+              //variable 3
+              print('Button Pressed!');
+            }),
+      ),
+    );
+  }
+}
+
+//IconTextButton- class
+class IconTextButton extends StatelessWidget {
+  //variable declarations
+  final IconData icon; //var-1 declaration
+  final String text; //var-2 declration
+  final VoidCallback onPressed; //var-3 declaration
+  //constructor
+  IconTextButton({
+    required this.icon,
+    required this.text,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(text),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.pink,
+        foregroundColor: Colors.black,
+        //padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      ),
+    );
+  }
+}
+// ----------------------------------------------------------------------------------------------------------------
